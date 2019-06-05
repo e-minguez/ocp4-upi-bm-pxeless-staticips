@@ -1,18 +1,25 @@
 # Verification
 
+* `oc get nodes`
+
 ```
-$ oc get nodes
 NAME                      STATUS   ROLES    AGE   VERSION
 ocp4-master-0.minwi.lan   Ready    master   22m   v1.13.4+cb455d664
 ocp4-master-1.minwi.lan   Ready    master   22m   v1.13.4+cb455d664
 ocp4-master-2.minwi.lan   Ready    master   22m   v1.13.4+cb455d664
 ocp4-worker-0.minwi.lan   Ready    worker   23m   v1.13.4+cb455d664
+```
 
-$ oc get clusterversion
+* `oc get clusterversion`
+
+```
 NAME      VERSION   AVAILABLE   PROGRESSING   SINCE   STATUS
 version   4.1.0     True        False         11s     Cluster version is 4.1.0
+```
 
-$ oc get clusteroperators
+* `oc get clusteroperators`
+
+```
 NAME                                 VERSION   AVAILABLE   PROGRESSING   DEGRADED   SINCE
 authentication                       4.1.0     True        False         False      49s
 cloud-credential                     4.1.0     True        False         False      21m
@@ -39,13 +46,23 @@ service-ca                           4.1.0     True        False         False  
 service-catalog-apiserver            4.1.0     True        False         False      19m
 service-catalog-controller-manager   4.1.0     True        False         False      19m
 storage                              4.1.0     True        False         False      16m
+```
 
-$ oc get pods --all-namespaces | grep -v -E 'Running|Completed'
+* `oc get pods --all-namespaces | grep -v -E 'Running|Completed'`
+
+```
 NAMESPACE                                               NAME                                                              READY   STATUS      RESTARTS   AGE
-$ oc get pods --all-namespaces -o name | wc -l
-162
+```
 
-$ oc get pods --all-namespaces -o wide
+* `oc get pods --all-namespaces -o name | wc -l`
+
+```
+162
+```
+
+* `oc get pods --all-namespaces -o wide`
+
+```
 NAMESPACE                                               NAME                                                              READY   STATUS      RESTARTS   AGE     IP             NODE                      NOMINATED NODE   READINESS GATES
 openshift-apiserver-operator                            openshift-apiserver-operator-85cb746d55-kvjgn                     1/1     Running     1          21h     10.129.0.4     ocp4-master-2.minwi.lan   <none>           <none>
 openshift-apiserver                                     apiserver-6ks2j                                                   1/1     Running     0          21h     10.131.0.27    ocp4-master-1.minwi.lan   <none>           <none>
@@ -226,6 +243,16 @@ openshift-service-ca                                    configmap-cabundle-injec
 openshift-service-ca                                    service-serving-cert-signer-7789d64745-xdmrt                      1/1     Running     0          21h     10.131.0.3     ocp4-master-1.minwi.lan   <none>           <none>
 openshift-service-catalog-apiserver-operator            openshift-service-catalog-apiserver-operator-54dcb96555-ms9k4     1/1     Running     0          21h     10.131.0.10    ocp4-master-1.minwi.lan   <none>           <none>
 openshift-service-catalog-controller-manager-operator   openshift-service-catalog-controller-manager-operator-f8cfjc2wj   1/1     Running     0          21h     10.131.0.9     ocp4-master-1.minwi.lan   <none>           <none>
+```
+
+* `oc get nodes -o wide --show-labels`
+
+```
+NAME                      STATUS   ROLES    AGE   VERSION             INTERNAL-IP    EXTERNAL-IP   OS-IMAGE                                                   KERNEL-VERSION               CONTAINER-RUNTIME                          LABELS
+ocp4-master-0.minwi.lan   Ready    master   22h   v1.13.4+cb455d664   192.168.32.100   <none>        Red Hat Enterprise Linux CoreOS 410.8.20190520.0 (Ootpa)   4.18.0-80.1.2.el8_0.x86_64   cri-o://1.13.9-1.rhaos4.1.gitd70609a.el8   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/hostname=ocp4-master-0.minwi.lan,node-role.kubernetes.io/master=,node.openshift.io/os_id=rhcos,node.openshift.io/os_version=4.1
+ocp4-master-1.minwi.lan   Ready    master   22h   v1.13.4+cb455d664   192.168.32.101   <none>        Red Hat Enterprise Linux CoreOS 410.8.20190520.0 (Ootpa)   4.18.0-80.1.2.el8_0.x86_64   cri-o://1.13.9-1.rhaos4.1.gitd70609a.el8   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/hostname=ocp4-master-1.minwi.lan,node-role.kubernetes.io/master=,node.openshift.io/os_id=rhcos,node.openshift.io/os_version=4.1
+ocp4-master-2.minwi.lan   Ready    master   22h   v1.13.4+cb455d664   192.168.32.102   <none>        Red Hat Enterprise Linux CoreOS 410.8.20190520.0 (Ootpa)   4.18.0-80.1.2.el8_0.x86_64   cri-o://1.13.9-1.rhaos4.1.gitd70609a.el8   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/hostname=ocp4-master-2.minwi.lan,node-role.kubernetes.io/master=,node.openshift.io/os_id=rhcos,node.openshift.io/os_version=4.1
+ocp4-worker-0.minwi.lan   Ready    worker   22h   v1.13.4+cb455d664   192.168.32.200    <none>        Red Hat Enterprise Linux CoreOS 410.8.20190520.0 (Ootpa)   4.18.0-80.1.2.el8_0.x86_64   cri-o://1.13.9-1.rhaos4.1.gitd70609a.el8   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/hostname=ocp4-worker-0.minwi.lan,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhcos,node.openshift.io/os_version=4.1
 ```
 
 [<< Previous: Upgrade](13-upgrade.md) | [Back to README](../README.md)

@@ -45,3 +45,4 @@ NOTE: Those baremetal servers are Dell based, so `racadm` will be used in order 
 * [12 - Post installation](docs-12-post-installation.md)
 * [13 - Upgrade](docs/13-upgrade.md)
 * [14 - Verification](docs/14-verification.md)
+* [99 - Tips and tricks](docs/99-tips-and-tricks.md)

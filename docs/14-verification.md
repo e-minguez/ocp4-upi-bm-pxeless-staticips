@@ -255,4 +255,4 @@ ocp4-master-2.minwi.lan   Ready    master   22h   v1.13.4+cb455d664   192.168.32
 ocp4-worker-0.minwi.lan   Ready    worker   22h   v1.13.4+cb455d664   192.168.32.200   <none>        Red Hat Enterprise Linux CoreOS 410.8.20190520.0 (Ootpa)   4.18.0-80.1.2.el8_0.x86_64   cri-o://1.13.9-1.rhaos4.1.gitd70609a.el8   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/hostname=ocp4-worker-0.minwi.lan,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhcos,node.openshift.io/os_version=4.1
 ```
 
-[<< Previous: Upgrade](13-upgrade.md) | [Back to README](../README.md)
+[<< Previous: Upgrade](13-upgrade.md) | [README](../README.md) | [Next: Tips and Tricks >>](99-tips-and-tricks.md)

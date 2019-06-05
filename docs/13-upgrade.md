@@ -30,4 +30,4 @@ oc adm upgrade --force=true \
 --to-image=quay.io/openshift-release-dev/ocp-release@sha256:49c4b6bf70061e522e3525aed534d087c9abfba7c39cbcbdd1bd770ab096bf9e
 ```
 
-[<< Previous: Post Installation](12-post-installation.md) | [Next: Verification >>](14-verification.md)
+[<< Previous: Post Installation](12-post-installation.md) | [README](../README.md) | [Next: Verification >>](14-verification.md)

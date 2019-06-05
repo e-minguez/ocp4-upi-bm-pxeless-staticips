@@ -86,4 +86,4 @@ done
 # rm -Rf ${TEMPDIR}
 ```
 
-[<< Previous: RHCOS files](8-rhcos-files.md) | [Next: Configure `oc` command >>](10-configure-oc-command.md)
+[<< Previous: RHCOS files](8-rhcos-files.md) | [README](../README.md) | [Next: Configure `oc` command >>](10-configure-oc-command.md)

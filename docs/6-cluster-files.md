@@ -48,4 +48,4 @@ cp ~/ocp-clusters/${CLUSTER_NAME}-install-config.yaml \
    ~/ocp-clusters/${CLUSTER_NAME}/install-config.yaml
 ```
 
-[<< Previous: OpenShift files](5-openshift-files.md) | [Next: Ignition files >>](7-ignition-files.md)
+[<< Previous: OpenShift files](5-openshift-files.md) | [README](../README.md) | [Next: Ignition files >>](7-ignition-files.md)

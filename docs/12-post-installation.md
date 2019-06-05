@@ -57,4 +57,4 @@ EOF
 oc adm policy add-cluster-role-to-user cluster-admin admin
 ```
 
-[<< Previous: Installation](11-installation.md) | [Next: Upgrade >>](13-upgrade.md)
+[<< Previous: Installation](11-installation.md) | [README](../README.md) | [Next: Upgrade >>](13-upgrade.md)

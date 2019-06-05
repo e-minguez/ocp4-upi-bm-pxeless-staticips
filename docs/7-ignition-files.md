@@ -167,4 +167,4 @@ modify_ignition
 
 NOTE: I'm 100% sure this whole code block can be improved… any suggestions appreciated :)
 
-[<< Previous: Cluster files](6-cluster-files.md) | [Next: RHCOS files >>](8-rhcos-files.md)
+[<< Previous: Cluster files](6-cluster-files.md) | [README](../README.md) | [Next: RHCOS files >>](8-rhcos-files.md)

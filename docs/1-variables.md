@@ -66,4 +66,4 @@ Then, use the vars file
 source ~/vars
 ```
 
-[<< Previous: Prerequisites](0-prerequisites.md) | [Next: Load balancer >>](2-load-balancer.md)
+[<< Previous: Prerequisites](0-prerequisites.md) | [README](../README.md) | [Next: Load balancer >>](2-load-balancer.md)

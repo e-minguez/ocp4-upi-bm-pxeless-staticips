@@ -55,4 +55,4 @@ systemctl --user daemon-reload
 systemctl --user enable nginx.service --now
 ```
 
-[<< Previous: Load Balancer](2-load-balancer.md) | [Next: DNS >>](4-dns.md)
+[<< Previous: Load Balancer](2-load-balancer.md) | [README](../README.md) | [Next: DNS >>](4-dns.md)

@@ -7,4 +7,4 @@ for asset in 'installer.iso' 'metal-bios.raw.gz' 'metal-uefi.raw.gz'; do
 done
 ```
 
-[<< Previous: Ignition files](7-ignition-files.md) | [Next: Modify ISOs >>](9-modify-isos.md)
+[<< Previous: Ignition files](7-ignition-files.md) | [README](../README.md) | [Next: Modify ISOs >>](9-modify-isos.md)

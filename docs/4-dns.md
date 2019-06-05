@@ -121,3 +121,5 @@ sudo nmcli con mod 'System eno1' ipv4.ignore-auto-dns yes
 sudo nmcli con mod 'System eno1' ipv4.dns "${DNS}"
 sudo systemctl restart NetworkManager
 ```
+
+[<< Previous: Web server](3-web-server.md) | [Next: OpenShift files >>](5-openshift-files.md)

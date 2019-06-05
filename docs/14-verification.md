@@ -45,3 +45,5 @@ NAMESPACE                                               NAME                    
 $ oc get pods --all-namespaces -o name | wc -l
 162
 ```
+
+[<< Previous: Upgrade](13-upgrade.md) | [Back to README](../README.md)

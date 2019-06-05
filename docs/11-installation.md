@@ -72,3 +72,5 @@ NOTE: The installation won't finish until the image registry has been deployed. 
 ```
 oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"storage":{"emptyDir":{}}}}'
 ```
+
+[<< Previous: Configure `oc` command](10-configure-oc-command.md) | [Next: Post installation >>](12-post-installation.md)

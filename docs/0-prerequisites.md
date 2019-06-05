@@ -74,3 +74,5 @@ Create an ssh key to be injected in the OCP hosts:
 ```
 ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa
 ```
+
+[<< Back to README](../README.md) | [Next: Variables >>](1-variables.md)

@@ -11,3 +11,5 @@ curl -sL https://mirror.openshift.com/pub/openshift-v4/clients/ocp/${OCPVERSION}
 
 sudo chmod 755 /usr/local/bin/{oc,kubectl,openshift-install}
 ```
+
+[<< Previous: DNS](4-dns.md) | [Next: Cluster files >>](6-cluster-files.md)

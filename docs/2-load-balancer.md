@@ -154,3 +154,5 @@ EOF
 systemctl --user daemon-reload
 systemctl --user enable haproxy.service --now
 ```
+
+[<< Previous: Variables](1-variables.md) | [Next: Web server >>](3-web-server.md)

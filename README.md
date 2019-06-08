@@ -42,7 +42,7 @@ NOTE: Those baremetal servers are Dell based, so `racadm` will be used in order 
 * [9 - Modify ISOs](docs/9-modify-isos.md)
 * [10 - Configure `oc` command](docs/10-configure-oc-command.md)
 * [11 - Installation](docs/11-installation.md)
-* [12 - Post installation](docs-12-post-installation.md)
+* [12 - Post installation](docs/12-post-installation.md)
 * [13 - Upgrade](docs/13-upgrade.md)
 * [14 - Verification](docs/14-verification.md)
 * [99 - Tips and tricks](docs/99-tips-and-tricks.md)

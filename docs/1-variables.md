@@ -66,4 +66,10 @@ Then, use the vars file
 source ~/vars
 ```
 
+Also, because of https://unix.stackexchange.com/questions/346841/why-does-sudo-i-not-set-xdg-runtime-dir-for-the-target-user and in order to make the systemd unit files:
+
+```
+export XDG_RUNTIME_DIR=/run/user/$UID
+```
+
 [<< Previous: Prerequisites](0-prerequisites.md) | [README](../README.md) | [Next: Load balancer >>](2-load-balancer.md)

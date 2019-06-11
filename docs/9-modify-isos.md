@@ -48,13 +48,13 @@ modify_cfg
 
 # MASTER-1
 NODE="master-1"
-IP=${MASTER0_IP}
+IP=${MASTER1_IP}
 FQDN="${CLUSTER_NAME}-${NODE}.${DOMAIN_NAME}"
 modify_cfg
 
 # MASTER-2
 NODE="master-2"
-IP=${MASTER0_IP}
+IP=${MASTER2_IP}
 FQDN="${CLUSTER_NAME}-${NODE}.${DOMAIN_NAME}"
 modify_cfg
 

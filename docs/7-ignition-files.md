@@ -128,12 +128,9 @@ EOF
 EOF
 
 modify_ignition(){
-  cp ${NGINX_DIRECTORY}/${TYPE}.ign ${NGINX_DIRECTORY}/${HOST}.ign.orig
-  jq '.storage.files += [input]' ${NGINX_DIRECTORY}/${HOST}.ign.orig ${NGINX_DIRECTORY}/${HOST}-hostname.json > ${NGINX_DIRECTORY}/${HOST}.ign.tmp
-  jq '.storage.files += [input]' ${NGINX_DIRECTORY}/${HOST}.ign.tmp ${NGINX_DIRECTORY}/${HOST}-ifcfg-eno1.json > ${NGINX_DIRECTORY}/${HOST}.ign.new
-  jq '.storage.files += [input]' ${NGINX_DIRECTORY}/${HOST}.ign.new ${NGINX_DIRECTORY}/${HOST}-ifcfg-eno2.json > ${NGINX_DIRECTORY}/${HOST}.ign.tmp
-  jq '.storage.files += [input]' ${NGINX_DIRECTORY}/${HOST}.ign.tmp ${NGINX_DIRECTORY}/hostname-mode.json > ${NGINX_DIRECTORY}/${HOST}.ign
-  rm -f ${NGINX_DIRECTORY}/${HOST}.ign.new ${NGINX_DIRECTORY}/${HOST}.ign.tmp ${NGINX_DIRECTORY}/${HOST}-hostname.json ${NGINX_DIRECTORY}/${HOST}-ifcfg-eno1.json ${NGINX_DIRECTORY}/${HOST}-ifcfg-eno2.json
+  cp -u ${NGINX_DIRECTORY}/${TYPE}.ign ${NGINX_DIRECTORY}/${HOST}.ign.orig
+  jq '.storage.files += [inputs]' ${NGINX_DIRECTORY}/${HOST}.ign.orig ${NGINX_DIRECTORY}/${HOST}-hostname.json ${HOST}-ifcfg-eno1.json ${HOST}-ifcfg-eno2.json ${NGINX_DIRECTORY}/hostname-mode.json > ${NGINX_DIRECTORY}/${HOST}.ign
+  rm -f ${NGINX_DIRECTORY}/${HOST}-hostname.json ${HOST}-ifcfg-eno1.json ${HOST}-ifcfg-eno2.json
 }
 
 HOST="bootstrap"

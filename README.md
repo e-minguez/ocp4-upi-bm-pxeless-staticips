@@ -25,7 +25,7 @@ NOTE: Those baremetal servers are Dell based, so `racadm` will be used in order 
 
 # References
 
-* https://github.com/christianh814/openshift-toolbox/tree/master/ocp4_upi_beta
+* https://github.com/christianh814/openshift-toolbox/tree/master/ocp4_upi
 * https://docs.openshift.com/container-platform/4.1/installing/installing_bare_metal/installing-bare-metal.html
 
 # Steps

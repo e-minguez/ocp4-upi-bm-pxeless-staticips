@@ -12,9 +12,13 @@ OCP4.1 GA installed
 
 # Environment
 
+In order to have a frictionless environment, a helper node will be used to achieve the OpenShift prerrequisites, including
+DNS entries, a load balancer and a httpd server to host some files required for the installation.
+If your enviorment has already a DNS server, load balancer and/or httpd server, you can use those instead.
+
 | Usage     | Hostname                 | IP             | NOTES                                         |
 |-----------|--------------------------|----------------|-----------------------------------------------|
-| Helper    | ocp4-helper.minwi.lan    | 192.168.32.2   | DNS, httpd, load balancer, etc.               |
+| Helper    | ocp4-helper.minwi.lan    | 192.168.32.2   | DNS, httpd & load balancer                    |
 | Bootstrap | ocp4-bootstrap.minwi.lan | 192.168.32.99  | To be removed from the cluster once installed |
 | Master-0  | ocp4-master-0.minwi.lan  | 192.168.32.100 |                                               |
 | Master-1  | ocp4-master-1.minwi.lan  | 192.168.32.101 |                                               |

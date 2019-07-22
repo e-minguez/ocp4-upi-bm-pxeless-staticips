@@ -14,7 +14,7 @@ OCP4.1 GA installed
 
 | Usage     | Hostname                 | IP             | NOTES                                         |
 |-----------|--------------------------|----------------|-----------------------------------------------|
-| Helper    | ocp4-helper.minwi.lan    | 192.168.32.2   | DNS, httpd, etc.                              |
+| Helper    | ocp4-helper.minwi.lan    | 192.168.32.2   | DNS, httpd, load balancer, etc.               |
 | Bootstrap | ocp4-bootstrap.minwi.lan | 192.168.32.99  | To be removed from the cluster once installed |
 | Master-0  | ocp4-master-0.minwi.lan  | 192.168.32.100 |                                               |
 | Master-1  | ocp4-master-1.minwi.lan  | 192.168.32.101 |                                               |

@@ -1,10 +1,13 @@
 # Intro
 
 The objective of this document is to provide instructions (automated ish) to install OCP4 on baremetal:
+
 * without PXE (pretty common scenario in big companies)
 * avoid installing stuff and use containers instead (instead yum/dnf install httpd, haproxy,... use containers)
 * use rootless containers if possible
 * use Fedora29/RHEL8 stuff (nmcli, firewalld, etc.)
+
+> **DISCLAIMER**: This is unofficial and unsupported procedure. Use the official [OpenShift](https://docs.openshift.com/) documentation for the supported scenarios.
 
 # Current status
 

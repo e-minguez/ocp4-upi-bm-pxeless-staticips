@@ -1,19 +1,29 @@
 # Modify ISOs
+
 It is required to add some parameters to the kernel line for the RHCOS installation:
+
 * `coreos.inst=yes`
 * `coreos.inst.install_dev=sda`
+
 To set the image and ignition file location:
+
 * `coreos.inst.image_url=<bare_metal_image_URL>`
 * `coreos.inst.ignition_url=http://example.com/config.ign`
+
 To provide the hosts fixed IPs it is required to specify the IP address as:
+
 * `ip=<ip>::<gateway>:<netmask>:<hostname>:<interface>:none`
+
 To specify the DNS nameserver IP:
+
 * `nameserver=<nameserver_ip>`
 
-Instead of doing it manually, different isos will be created (for bootstrap, masters and nodes) as:
+Instead of doing it manually, different ISOs will be created (for bootstrap,
+masters and nodes) as:
 
-```
-export VOLID=$(isoinfo -d -i ${NGINX_DIRECTORY}/rhcos-${RHCOSVERSION}-x86_64-installer.iso | awk '/Volume id/ { print $3 }')
+```bash
+export VOLID=$(isoinfo -d -i ${NGINX_DIRECTORY}/rhcos-${RHCOSVERSION}-x86_64-installer.iso | \
+  awk '/Volume id/ { print $3 }')
 TEMPDIR=$(mktemp -d)
 
 cd ${TEMPDIR}

@@ -1,8 +1,9 @@
 # Web server
 
-To quickly spin up a web server, we will use the official NGINX container image:
+To quickly spin up a web server, we will use the official NGINX container
+image:
 
-```
+```bash
 mkdir -p ${NGINX_DIRECTORY}
 
 podman run -d \
@@ -15,21 +16,23 @@ podman run -d \
 
 Open the 8001 port to the outside world
 
-```
+```bash
 sudo firewall-cmd --zone="$(firewall-cmd --get-default-zone)" \
   --add-port=8001/tcp --permanent
 ```
 
 Reload the firewall:
 
-```
+```bash
 sudo firewall-cmd --reload
 ```
 
 ## Systemd user unit
-A systemd user unit can be created to automatically start/stop the podman container as a user:
 
-```
+A systemd user unit can be created to automatically start/stop the podman
+container as a user:
+
+```bash
 # This shouldn't be needed if has been previously done for the HAProxy pod
 # Enable start user unit without being logged first
 # sudo loginctl enable-linger ocp

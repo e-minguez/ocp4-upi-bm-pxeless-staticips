@@ -1,12 +1,20 @@
 # Installation
-With everything prepared, it is time to install the baremetal servers. If the previous steps have been doing properly, the ISOs are modified to avoid requiring manual input and the ignition files shall configure the networking to use the DNS we have set.
-NOTE: In my environment, it is required to have an iDRAC version >= 2.60.60.60 to be able to map virtual media iso from http.
 
-We will be using a containerized `racadm` command to avoid installing it locally. The source of this container image can be seen in https://github.com/e-minguez/racadm-container
+With everything prepared, it is time to install the baremetal servers. If the
+previous steps have been doing properly, the ISOs are modified to avoid
+requiring manual input and the ignition files shall configure the networking to
+use the DNS we have set.
+
+NOTE: In my environment, it is required to have an iDRAC version >= 2.60.60.60
+to be able to map virtual media iso from http.
+
+We will be using a containerized `racadm` command to avoid installing it
+locally. The source of this container image can be seen in
+https://github.com/e-minguez/racadm-container
 
 ## Install bootstrap
 
-```
+```bash
 # Note: racadm commands will complain about certificates
 podman pull quay.io/eminguez/container-racadm
 
@@ -23,7 +31,7 @@ racadm jobqueue create BIOS.Setup.1-1 -r pwrcycle
 
 ## Install hosts
 
-```
+```bash
 install_host(){
   alias racadm='podman run --rm eminguez/container-racadm -r ${IDRACIP} -u ${IDRACUSER} -p ${IDRACPASS}'
   racadm remoteimage -d
@@ -55,21 +63,23 @@ install_host
 
 After a while, the hosts will be running RHCOS, then wait until the bootstrap process ends:
 
-```
+```bash
 openshift-install --dir=$(readlink -f ~/ocp-clusters/${CLUSTER_NAME}) --log-level debug \
   wait-for bootstrap-complete
 ```
 
 Then, wait until the install is complete:
 
-```
+```bash
 openshift-install --dir=$(readlink -f ~/ocp-clusters/${CLUSTER_NAME}) --log-level debug \
   wait-for install-complete
 ```
 
-NOTE: The installation won't finish until the image registry has been deployed. As there are no storage available, we will use emptydir (not recommended for production!!!):
+WARNING: The installation won't finish until the image registry has been
+deployed. As there is no storage available, emptydir will be used (not
+recommended for production!!!):
 
-```
+```bash
 oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"storage":{"emptyDir":{}}}}'
 ```
 

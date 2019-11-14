@@ -1,23 +1,31 @@
 # Cluster files
-openshift-install requires some files (pull secret and install-config) and creates some other assets (manifests, ignition files, logs, etc.). In order to have a proper directory structure, they will be stored in ~/ocp-clusters/<cluster-name>:
 
-```
+`openshift-install` requires some files (pull secret and install-config) and
+creates some other assets (manifests, ignition files, logs, etc.). In order to
+have a proper directory structure, they will be stored in
+`~/ocp-clusters/<cluster-name>`:
+
+```bash
 mkdir -p ~/ocp-clusters/${CLUSTER_NAME}/
 ```
 
 ## Pull secret
-Visit cloud.openshift.com, download your pull secret and copy it into `~/ocp-clusters/pull_secret.json` (to be used by all clusters) as:
 
-```
+Visit [cloud.openshift.com](cloud.openshift.com), download your pull secret and
+copy it into `~/ocp-clusters/pull_secret.json` (to be used by all clusters) as:
+
+```bash
 cat ~/ocp-clusters/pull_secret.json
 # pull_secret content...
 export PULL_SECRET=$(cat ~/ocp-clusters/pull_secret.json)
 ```
 
 ## install-config.yaml
-Instead creating the file directly (it will be removed by openshift-install), it is created with the cluster prefix, then copied to the proper location:
 
-```
+Instead creating the file directly (it will be removed by openshift-install),
+it is created with the cluster prefix, then copied to the proper location:
+
+```bash
 cat > ~/ocp-clusters/${CLUSTER_NAME}-install-config.yaml << EOF
 apiVersion: v1
 baseDomain: ${DOMAIN_NAME}

@@ -1,7 +1,9 @@
 # Haproxy
-To quickly spin up an HAProxy server, we will use the HAProxy official container image:
 
-```
+To quickly spin up an HAProxy server, we will use the HAProxy official
+container image:
+
+```bash
 mkdir -p ${HAPROXY_DIRECTORY}
 
 cat > ${HAPROXY_DIRECTORY}/haproxy.cfg << EOF
@@ -87,7 +89,7 @@ EOF
 
 Then, run the container:
 
-```
+```bash
 podman run -d \
   --expose=9000 --expose=22623 --expose=6443 --expose=8080 --expose=8443 \
   -p 9000:9000 -p 22623:22623 -p 6443:6443 -p 8080:8080 -p 8443:8443 \
@@ -98,7 +100,7 @@ podman run -d \
 
 Configure firewall to forward 8443 to 443 and 8080 to 80
 
-```
+```bash
 sudo firewall-cmd --zone="$(firewall-cmd --get-default-zone)" \
   --add-forward-port=port=443:proto=tcp:toport=8443 --permanent
 sudo firewall-cmd --zone="$(firewall-cmd --get-default-zone)" \
@@ -107,7 +109,7 @@ sudo firewall-cmd --zone="$(firewall-cmd --get-default-zone)" \
 
 Open those ports to the outside world
 
-```
+```bash
 for service in http https
 do
   sudo firewall-cmd --zone="$(firewall-cmd --get-default-zone)" \
@@ -123,14 +125,16 @@ done
 
 Reload the firewall
 
-```
+```bash
 sudo firewall-cmd --reload
 ```
 
 ## Systemd user unit
-A systemd user unit can be created to automatically start/stop the podman container as a user:
 
-```
+A systemd user unit can be created to automatically start/stop the podman
+container as a user:
+
+```bash
 # Enable start user unit without being logged first
 sudo loginctl enable-linger ocp
 

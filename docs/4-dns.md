@@ -1,7 +1,9 @@
 # DNS
-To quickly spin up a DNS server, we will use the official CoreDNS container image:
 
-```
+To quickly spin up a DNS server, we will use the official CoreDNS container
+image:
+
+```bash
 mkdir -p ${COREDNS_DIRECTORY}
 
 # CoreDNS configuration file
@@ -20,9 +22,12 @@ ${DOMAIN_NAME}:53 {
 EOF
 
 ```
-Then, the proper zone file, including the SRV records, CNAMES, etc. To avoid escaping dollar symbols, etc. we create the template file first then replace the variables using sed:
 
-```
+Then, the proper zone file, including the SRV records, CNAMES, etc. To avoid
+escaping dollar symbols, etc. we create the template file first then replace
+the variables using `sed`:
+
+```bash
 cat > ${COREDNS_DIRECTORY}/db.${DOMAIN_NAME} << 'EOF'
 $ORIGIN DOMAIN_NAME.
 $TTL 10800      ; 3 hours
@@ -64,10 +69,12 @@ sed -i -e "s/MASTER0_IP/${MASTER0_IP}/g" \
        ${COREDNS_DIRECTORY}/db.${DOMAIN_NAME}
 ```
 
-I've not been able to query from localhost or $(hostname -I) from the host running the coredns container when running rootless.
-`/etc/resolv.conf` doesn't allow specific ports and redirecting localhost/ip is really messy, so, this container runs with sudo (and binds to :53):
+I've not been able to query from localhost or `$(hostname -I)` from the host
+running the coredns container when running rootless.  `/etc/resolv.conf`
+doesn't allow specific ports and redirecting localhost/ip is really messy,
+hence, this container runs with `sudo ` (and binds to :53):
 
-```
+```bash
 sudo podman run -d \
   --expose=53 --expose=53/udp \
   -p ${DNS}:53:53 -p ${DNS}:53:53/udp \
@@ -75,14 +82,17 @@ sudo podman run -d \
   --name coredns \
   coredns/coredns:latest -conf /etc/coredns/Corefile
 
-sudo firewall-cmd --zone="$(firewall-cmd --get-default-zone)" --add-service=dns --permanent
+sudo firewall-cmd --zone="$(firewall-cmd --get-default-zone)" \
+  --add-service=dns --permanent
 sudo firewall-cmd --reload
 ```
 
 ## Systemd unit
-A systemd unit can be created to automatically start/stop the podman container. In this case, as we require root, we will create a regular systemd unit:
 
-```
+A systemd unit can be created to automatically start/stop the podman container.
+In this case, as we require root, we will create a regular systemd unit:
+
+```bash
 sudo bash -c 'cat > /etc/systemd/system/coredns.service << EOF
 [Unit]
 Description=CoreDNS
@@ -104,7 +114,7 @@ systemctl enable coredns.service
 
 To see if it works:
 
-```
+```bash
 $ sudo podman ps
 CONTAINER ID  IMAGE                             COMMAND               CREATED        STATUS            PORTS                                           NAMES
 abf77a3da374  docker.io/coredns/coredns:latest  /coredns -conf /e...  9 minutes ago  Up 2 seconds ago  10.19.138.7:53->53/tcp, 10.19.138.7:53->53/udp  coredns
@@ -114,9 +124,9 @@ $ sudo podman ps
 CONTAINER ID  IMAGE  COMMAND  CREATED  STATUS  PORTS  NAMES
 ```
 
-Then, modify `/etc/resolv.conf` to use the coredns container:
+Then, modify `/etc/resolv.conf` to use the CoreDNS container:
 
-```
+```bash
 sudo nmcli con mod 'System eno1' ipv4.ignore-auto-dns yes
 sudo nmcli con mod 'System eno1' ipv4.dns "${DNS}"
 sudo systemctl restart NetworkManager

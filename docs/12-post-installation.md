@@ -1,7 +1,8 @@
 # Post-installation
+
 * Remove bootstrap from the load balancer:
 
-```
+```bash
 cp ${HAPROXY_DIRECTORY}/haproxy.cfg{,.orig}
 sed -i -e '/server bootstrap/d' ${HAPROXY_DIRECTORY}/haproxy.cfg
 systemctl --user restart haproxy
@@ -9,7 +10,7 @@ systemctl --user restart haproxy
 
 * As the environment has a single worker, scale down the router replica to 1 pod:
 
-```
+```bash
 oc patch \
    --namespace=openshift-ingress-operator \
    --patch='{"spec": {"replicas": 1}}' \
@@ -17,10 +18,10 @@ oc patch \
    ingresscontroller/default
 ```
 
-* Configure authentication backend (htpasswd)
-The following script will create an "admin" user with password "admin" with cluster-admin role:
+* Configure authentication backend (htpasswd) The following script will create
+  an "admin" user with password "admin" with cluster-admin role:
 
-```
+```bash
 user=admin
 password=admin
 htpasswd=$(printf "$user:$(openssl passwd -apr1 $password)\n")

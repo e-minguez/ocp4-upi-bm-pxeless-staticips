@@ -1,8 +1,9 @@
 # Variables
 
-Those variables will allow other environments/versions and modifications to where the files are hosted:
+Those variables will allow other environments/versions and modifications to
+where the files are hosted:
 
-```
+```bash
 cat > ~/vars << EOF
 # RHCOS and OCP4 versions
 # From https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.1/
@@ -62,13 +63,15 @@ EOF
 
 Then, use the vars file
 
-```
+```bash
 source ~/vars
 ```
 
-Also, because of https://unix.stackexchange.com/questions/346841/why-does-sudo-i-not-set-xdg-runtime-dir-for-the-target-user and in order to make the systemd unit files:
+Also, because `XDG_RUNTIME_DIR` [is not set under
+`sudo`](https://unix.stackexchange.com/questions/346841/why-does-sudo-i-not-set-xdg-runtime-dir-for-the-target-user)
+and in order to make the systemd unit files:
 
-```
+```bash
 export XDG_RUNTIME_DIR=/run/user/$UID
 ```
 

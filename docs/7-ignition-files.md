@@ -1,8 +1,10 @@
 # Ignition files
-Create the ignition files once the install-config.yaml file has been created:
 
-```
-openshift-install create ignition-configs --dir=$(readlink -f ~/ocp-clusters/${CLUSTER_NAME})
+Create the ignition files once the `install-config.yaml` file has been created:
+
+```bash
+openshift-install create ignition-configs \
+  --dir=$(readlink -f ~/ocp-clusters/${CLUSTER_NAME})
 
 # They are going to be modified and be served by the NGINX container
 cp ~/ocp-clusters/${CLUSTER_NAME}/*.ign ${NGINX_DIRECTORY}
@@ -11,9 +13,13 @@ cp ~/ocp-clusters/${CLUSTER_NAME}/*.ign ${NGINX_DIRECTORY}
 NOTE: The ignition files include certificates that are only valid for 24h
 
 ## Ignition configs modifications
-In order to be able to set static IP addresses for the hosts, it is required to inject the proper configuration (`/etc/sysconfig/network-scripts/ifcfg-<interface>` & `/etc/hostname`) via ignition:
 
-```
+In order to be able to set static IP addresses for the hosts, it is required to
+inject the proper configuration
+(`/etc/sysconfig/network-scripts/ifcfg-<interface>` & `/etc/hostname`) via
+ignition:
+
+```bash
 create_ifcfg(){
   cat > ${NGINX_DIRECTORY}/${HOST}-eno2 << EOF
 DEVICE=eno2

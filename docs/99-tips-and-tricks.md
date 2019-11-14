@@ -1,14 +1,19 @@
 # Tips and tricks
+
 This section explains some tips and tricks to familiarize with OpenShift 4.
 
-NOTE: [I wrote this](https://github.com/openshift/training/commit/eab9062e2b5c6a31f510dc2a0e813ee5221e4452) in the [openshift/training](https://github.com/openshift/training/blob/master/docs/97-tips-and-tricks.md) repository back in the day and it still applies.
+NOTE: [I wrote
+this](https://github.com/openshift/training/commit/eab9062e2b5c6a31f510dc2a0e813ee5221e4452)
+in the
+[openshift/training](https://github.com/openshift/training/blob/master/docs/97-tips-and-tricks.md)
+repository back in the day and it still applies.
 
 ## NTP configuration
 
 RHCOS uses chronyd to synchronize the system time. The default configuration
 uses the `*.rhel.pool.ntp.org` servers:
 
-```
+```bash
 $ grep -v -E '^#|^$' /etc/chrony.conf
 server 0.rhel.pool.ntp.org iburst
 server 1.rhel.pool.ntp.org iburst
@@ -27,7 +32,7 @@ by the following procedure:
 
 * Create the proper file with your custom tweaks and encode it as base64:
 
-```
+```bash
 cat << EOF | base64
 server clock.redhat.com iburst
 driftfile /var/lib/chrony/drift
@@ -40,7 +45,7 @@ EOF
 * Create the MachineConfig file with the base64 string from the previous command
 as:
 
-```
+```bash
 cat << EOF > ./masters-chrony-configuration.yaml
 apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfig
@@ -74,7 +79,7 @@ Substitute the base64 string with your own.
 
 * Apply it
 
-```
+```bash
 oc apply -f ./masters-chrony-configuration.yaml
 ```
 
@@ -82,26 +87,26 @@ oc apply -f ./masters-chrony-configuration.yaml
 The master configuration is now stored in a `configMap`. During the installation
 process, a few `configMaps` are created, so in order to get the latest:
 
-```
+```bash
 oc get cm -n openshift-kube-apiserver | grep config
 ```
 
 Observe the latest id and then:
 
-```
+```bash
 oc get cm -n openshift-kube-apiserver config-ID
 ```
 
 To get the output in a human-readable form, use:
 
-```
+```bash
 oc get cm -n openshift-kube-apiserver config-ID \
   -o jsonpath='{.data.config\.yaml}' | jq
 ```
 
-For the OpenShift api configuration:
+For the OpenShift API configuration:
 
-```
+```bash
 oc get cm -n openshift-apiserver config -o jsonpath='{.data.config\.yaml}' | jq
 ```
 
@@ -112,7 +117,7 @@ pods as 'Completed' doesn't harm nor waste resources but if you want to delete
 them to have only 'running' pods in your environment you can use the following
 command:
 
-```
+```bash
 oc get pods --all-namespaces | \
   awk '{if ($4 == "Completed") system ("oc delete pod " $2 " -n " $1 )}'
 ```
@@ -121,7 +126,7 @@ oc get pods --all-namespaces | \
 
 A handy one liner to see the pods having issues (such as CrashLoopBackOff):
 
-```
+```bash
 oc get pods --all-namespaces | grep -v -E 'Completed|Running'
 ```
 

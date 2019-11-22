@@ -8,38 +8,37 @@ use the DNS we have set.
 NOTE: In my environment, it is required to have an iDRAC version >= 2.60.60.60
 to be able to map virtual media iso from http.
 
-We will be using a containerized `racadm` command to avoid installing it
-locally. The source of this container image can be seen in
-https://github.com/e-minguez/racadm-container
+We will be using a racadm directly from the iDRAC connecting via ssh to avoid
+installing it locally via [sshpass](https://sourceforge.net/projects/sshpass/).
 
 ## Install bootstrap
 
 ```bash
 # Note: racadm commands will complain about certificates
-podman pull quay.io/eminguez/container-racadm
+sudo yum install -y sshpass
 
 # Bootstrap
 export IDRACIP=${BOOTSTRAP_IDRAC_IP}
-alias racadm='podman run --rm eminguez/container-racadm -r ${IDRACIP} -u ${IDRACUSER} -p ${IDRACPASS}'
-racadm remoteimage -d
-racadm remoteimage -c -u "foo" -p "bar" -l ${URL}/bootstrap.iso
-racadm jobqueue delete -i JID_CLEARALL
-racadm set BIOS.OneTimeBoot.OneTimeBootMode OneTimeBootSeq
-racadm set BIOS.OneTimeBoot.OneTimeBootSeqDev Optical.iDRACVirtual.1-1
-racadm jobqueue create BIOS.Setup.1-1 -r pwrcycle
+racadm="sshpass -e ssh -oStrictHostKeyChecking=no ${IDRACUSER}@${IDRACIP} racadm"
+$racadm remoteimage -d
+$racadm remoteimage -c -u "foo" -p "bar" -l ${URL}/bootstrap.iso
+$racadm jobqueue delete -i JID_CLEARALL
+$racadm set BIOS.OneTimeBoot.OneTimeBootMode OneTimeBootSeq
+$racadm set BIOS.OneTimeBoot.OneTimeBootSeqDev Optical.iDRACVirtual.1-1
+$racadm jobqueue create BIOS.Setup.1-1 -r pwrcycle
 ```
 
 ## Install hosts
 
 ```bash
 install_host(){
-  alias racadm='podman run --rm eminguez/container-racadm -r ${IDRACIP} -u ${IDRACUSER} -p ${IDRACPASS}'
-  racadm remoteimage -d
-  racadm remoteimage -c -u "foo" -p "bar" -l ${URL}/${NODE}.iso
-  racadm jobqueue delete -i JID_CLEARALL
-  racadm set BIOS.OneTimeBoot.OneTimeBootMode OneTimeBootSeq
-  racadm set BIOS.OneTimeBoot.OneTimeBootSeqDev Optical.iDRACVirtual.1-1
-  racadm jobqueue create BIOS.Setup.1-1 -r pwrcycle
+  racadm="sshpass -e ssh -oStrictHostKeyChecking=no ${IDRACUSER}@${IDRACIP} racadm"
+  $racadm remoteimage -d
+  $racadm remoteimage -c -u "foo" -p "bar" -l ${URL}/${NODE}.iso
+  $racadm jobqueue delete -i JID_CLEARALL
+  $racadm set BIOS.OneTimeBoot.OneTimeBootMode OneTimeBootSeq
+  $racadm set BIOS.OneTimeBoot.OneTimeBootSeqDev Optical.iDRACVirtual.1-1
+  $racadm jobqueue create BIOS.Setup.1-1 -r pwrcycle
 }
 
 # Masters

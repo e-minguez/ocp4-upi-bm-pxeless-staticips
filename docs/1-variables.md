@@ -44,7 +44,8 @@ export MASTER1_IDRAC_IP="192.168.31.101"
 export MASTER2_IDRAC_IP="192.168.31.102"
 export WORKER0_IDRAC_IP="192.168.31.200"
 export IDRACUSER="root"
-export IDRACPASS="calvin"
+# sshpass requires this particular variable
+export SSHPASS="calvin"
 
 # We will use this host as DNS, static assets server and haproxy
 export MY_IP="192.168.32.2"
